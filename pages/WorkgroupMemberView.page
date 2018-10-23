@@ -1,0 +1,30 @@
+<apex:page standardController="Workgroup_Member__c" extensions="WGController">
+
+<!-- RelEng Perforce/RCS Header - Do not remove! -->
+<!-- ******************************************* -->
+<!-- $Author: mfullmore $ -->
+<!-- $Change: 932534 $ -->
+<!-- $DateTime: 2009/03/18 15:33:46 $ -->
+<!-- $File: //it/applications/supportforce/mar2009/prod/src/pages/WorkgroupMemberView.page $ -->
+<!-- $Id: //it/applications/supportforce/mar2009/prod/src/pages/WorkgroupMemberView.page#1 $ -->
+<!-- $Revision: #1 $ -->
+
+      <apex:form >
+      <apex:sectionHeader title="Workgroup Member" subtitle="{!Member.Member_Name__c}"/>
+        <apex:pageBlock title="Workgroup Member Detail" mode="detail">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!newDelete}" value="Delete" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Information" columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Member Name</apex:outputLabel>
+                    <apex:outputField value="{!member.Member_Name__c}" id="member_name"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Workgroup</apex:outputLabel>
+                    <apex:outputField value="{!member.Workgroup__c}" id="member_workgroup"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,43 @@
+<apex:page standardController="Tech_Asset__c" extensions="ClusterController" showHeader="false" sidebar="false">
+    <apex:form >
+        <apex:pageBlock title="Related Physical Cluster Records">
+            <apex:pageBlockButtons >
+            	<apex:commandButton action="{!showCluster}" value="Display Cluster" id="theButton" />
+            </apex:pageBlockButtons>
+            <apex:outputPanel id="thePhysList">
+            <apex:pageBlockTable title="Physical Assets" value="{!physicalAssets}" var="passet" id="phyTable" rendered="{!showPhysList}">
+                <apex:column >
+                    <apex:facet name="header">Name</apex:facet>
+                    <apex:outputLink value="/{!passet.Id}" target="_parent">{!passet.Name}</apex:outputLink>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Cluster</apex:facet>
+                    <apex:outputText >{!passet.Cluster__c}</apex:outputText>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Record Type</apex:facet>
+                    <apex:outputText >{!passet.RecordType.Name}</apex:outputText>
+                </apex:column>
+            </apex:pageBlockTable>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        <apex:pageBlock title="Related Virtual Cluster Records">
+             <apex:outputPanel id="theVirtList">
+            <apex:pageBlockTable title="Virtual Assets" value="{!virtualAssets}" var="vasset" id="virTable" rendered="{!showVirtList}">
+                <apex:column >
+                    <apex:facet name="header">Name</apex:facet>
+                    <apex:outputLink value="/{!vasset.Id}" target="_parent">{!vasset.Name}</apex:outputLink>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Cluster</apex:facet>
+                    <apex:outputText >{!vasset.Cluster__c}</apex:outputText>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Record Type</apex:facet>
+                    <apex:outputText >{!vasset.RecordType.Name}</apex:outputText>
+                </apex:column>
+            </apex:pageBlockTable>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

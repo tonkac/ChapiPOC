@@ -1,0 +1,55 @@
+<apex:page id="locationSearchPage"
+            controller="locationController"
+            tabStyle="ABCs_Location__c"
+            standardStylesheets="true"
+            showHeader="true"
+            sidebar="false">
+    <apex:includeScript value="{!URLFOR($Resource.jQuery)}"/>
+    <script>
+        var pos = {};
+        function success(position) {
+            pos = position.coords;
+            console.log(pos);
+        }
+
+        function error(msg) {
+            console.log(msg);
+        }
+        
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            error('not supported');
+            alert('not supported');
+        }
+        
+        function setPos() {
+            $("#temp").hide();
+            var inputs = document.getElementsByTagName('input');
+            alert(pos.latitude + ',' + pos.longitude);
+            for(var x = 0; x < inputs.length; x++) {
+                //alert(pos.latitude + ',' + pos.longitude);
+                $('#myLocal')
+                if(inputs[x].id.indexOf('myLocal') >= 0) { inputs[x].value = pos.latitude + ',' + pos.longitude; }
+                //if(inputs[x].id.indexOf('contactlong') >= 0) { inputs[x].value = pos.longitude; }
+            }
+            return false;
+        }
+
+    </script>
+
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!quicksave}" value="Save"/>
+                <button onClick="setPos(); return false;" id="setPosBtn">Set Position</button>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="My Location" columns="2">
+                <apex:pageBlockSectionItem id="myLocation">
+                    <apex:outputLabel >My Location</apex:outputLabel>
+                    <apex:outputText ><div id="temp">something</div><input name="myLocal" type="text" id="myLocal" value="testing"/></apex:outputText>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,150 @@
+<apex:page sidebar="false" showHeader="false" tabStyle="Contact" controller="siteController">
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            font-style: normal;
+            line-height: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            color: #333333;
+            background-color: black;
+            margin-top: 15px;
+            margin-bottom: 25px;
+            height: 25px;
+            margin-right: 50px;
+            margin-left: 50px;
+        }
+        .inside {
+            background-image: url({!$Resource.table_main_background});
+            background-repeat: repeat;
+            background-color: #ffffff;
+            border-right-color: #7D7D7D;
+            border-right-style: inset;
+            border-right-width: thick;
+            border-bottom-color: #7D7D7D;
+            border-bottom-style: inset;
+            border-bottom-width: thick;
+            border-left-color: #FEFEFE;
+            border-left-style: inset;
+            border-left-width: thick;
+            border-top-color: #FEFEFE;
+            border-top-style: inset;
+            border-top-width: thick;
+            text-align: center;
+        }
+
+        .tableTop {
+            background-image: url({!$Resource.table_top});
+            background-position: center top;
+            background-repeat: repeat-x;
+            background-color: #FFFFFF;
+            margin: 0px;
+            padding: 10px;
+            width: 100%;
+            vertical-align: top;
+        }
+
+        .infoCell {
+            
+        }
+
+        .servicesBox {
+            list-style-type: square;
+            width: 100%;
+            height: 100%;
+            background-image: url(../Images/boxTopShade.gif);
+            background-repeat: repeat-x;
+            background-position: top;
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-right-style: solid;
+            border-right-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-left-style: solid;
+            border-left-width: 1px;
+            border-top-color: #CCCCCC;
+            border-right-color: #CCCCCC;
+            border-bottom-color: #CCCCCC;
+            border-left-color: #CCCCCC;
+        }
+
+    </style>
+    <div class="body">
+    <table width="80%"  border="0" cellspacing="0" cellpadding="0" id="mainBody" class="inside" align="center">
+        <tr>
+            <th>&nbsp;</th>
+            <td width="583">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <th>&nbsp;</th>
+            <td><apex:image url="{!$Resource.titleImage}"/></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <th>&nbsp;</th>
+            <td width="583">&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+    &nbsp;
+    <table width="80%"  border="0" cellspacing="0" cellpadding="10" id="mainBody" class="inside" align="center">
+        <tr>
+            <td>
+                <table width="90%" border="0" class="tableTop">
+                    <tr>
+                        <td>Left pane</td>
+                    </tr>
+                </table>
+            </td>
+            <td  width="583">
+                <table width="90%" border="0" class="tableTop">
+                    <tr>
+                        <td>
+<!--    begin the data for the center of the page    -->
+                            <apex:dataTable value="{!AllBikes}" var="b" styleClass="servicesBox" border="2" cellpadding="2">
+                                <apex:column >
+                                    <table border="1" width="100%" cellPadding="5">
+                                        <tr>
+                                            <td><apex:outputText value="{!b.Model__c}"/></td>
+                                            <td><apex:outputText value="{!b.Make__c}"/></td>
+                                            <td><apex:outputText value="{!b.Year__c}"/></td>
+                                            <td><apex:outputText ><apex:image id="theImage" value="{!b.ImageURL__c}" height="50" width="50"/></apex:outputText></td>
+                                        </tr>
+                                    </table>
+                                 </apex:column>
+                            </apex:dataTable>
+
+
+
+
+<!--    end the main body of the page -->                        
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table width="90%" border="0" class="tableTop">
+                    <tr>
+                        <td>right pane</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+        `       <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/pages/NNY-Harley-Owners-Group/173713909344830"
+                    scrolling="no" frameborder="0"
+                    style="border:none; width:450px; height:25px">
+                </iframe>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+    </div>
+</apex:page>

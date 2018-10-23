@@ -1,0 +1,3 @@
+<apex:page standardController="Tech_Asset__c">
+	<apex:iframe src="/apex/ClusterPage" scrolling="true" />
+</apex:page>

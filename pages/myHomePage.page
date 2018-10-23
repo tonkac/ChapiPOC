@@ -1,0 +1,10 @@
+<apex:page controller="siteController" tabStyle="Motorcycle__c" sidebar="false">
+    <apex:iframe src="/apex/leftSideBar" width="20%"/>
+    <apex:iframe src="/apex/bodyPage" width="60%"/>
+    <apex:iframe src="/apex/rightSidePage" width="20%"/>
+    <apex:dataTable value="{!allBikes}" var="b">
+        <apex:column value="{!b.Year__c}"/>
+        <apex:column value="{!b.Make__c}"/>
+        <apex:column value="{!b.Model__c}"/>
+    </apex:dataTable>
+</apex:page>

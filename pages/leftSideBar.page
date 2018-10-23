@@ -1,0 +1,7 @@
+<apex:page sidebar="false" showHeader="false">
+<table width="80%"  border="1" cellspacing="0" cellpadding="0" id="mainBody" class="inside" align="center">
+    <tr>
+        <td>hmm</td>
+    </tr>
+</table>
+</apex:page>

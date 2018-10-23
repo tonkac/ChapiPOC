@@ -1,0 +1,5 @@
+<apex:page standardController="Tech_Asset__c" extensions="getBIAs">
+    <apex:pageBlock title="My Page" mode="detail">
+    
+    </apex:pageBlock>
+</apex:page>

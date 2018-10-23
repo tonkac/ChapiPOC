@@ -1,0 +1,18 @@
+<apex:page standardController="Tech_Asset__c" extensions="ClusterController">
+        <apex:pageBlock >
+            <apex:pageBlockTable title="Physical Assets" value="{!physicalAssets}" var="passet" id="phyTable">
+                <apex:column >
+                    <apex:facet name="header">Name</apex:facet>
+                    <apex:outputLink value="/{!passet.Id}" target="_parent">{!passet.Name}</apex:outputLink>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Cluster</apex:facet>
+                    <apex:outputText >{!passet.Cluster__c}</apex:outputText>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Record Type</apex:facet>
+                    <apex:outputText >{!passet.RecordType.Name}</apex:outputText>
+                </apex:column>
+            </apex:pageBlockTable>
+		</apex:pageBlock>
+</apex:page>

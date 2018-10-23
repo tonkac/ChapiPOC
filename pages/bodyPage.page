@@ -1,0 +1,11 @@
+<apex:page sidebar="false" showHeader="false" controller="siteController">
+    <apex:pageBlock >
+    here
+        <apex:dataTable value="{!allBikes}" var="b" rendered="true">
+            <apex:outputField value="{!b.Name}">here</apex:outputField>here
+            <apex:outputField value="{!b.Model__c}"/>
+            <apex:outputField value="{!b.Make__c}"/>
+            <apex:outputField value="{!b.Year__c}"/>
+        </apex:dataTable>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,37 @@
+<apex:page showHeader="false" title="{!$Label.ABCs_inMaintenance}" cache="false">
+	<style>
+		body {
+			background-color: #242424;
+			padding-left: 15%;
+			padding-right: 15%;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			vertical-align: text-top;
+		}
+
+		.outline {
+			border-radius: 15px;
+			position: static;
+			height: 300px;
+			padding: 20px;
+			background-color: gray;
+			box-shadow: 1px 1px 5px #888888;
+		}
+	</style>
+
+	<div id="mainSection" class="outline">
+		<apex:image url="{!URLFOR($Resource.SiteSamples, 'img/warning.gif')}"/>
+	</div>	
+	<!--apex:define name="error">
+		<apex:outputText escape="false" styleClass="title" value="{!$Label.site.down_for_maintenance}">
+		<apex:param value="{!$Site.CurrentSiteUrl}"/>
+		</apex:outputText>
+		<br/>
+		<br/>
+		<apex:outputText value="{!$Label.site.sorry_for_inconvenience_back_shortly}"/>
+		<apex:outputText escape="false" value=" {!$Label.site.get_in_touch}">
+		<apex:param value="mailto:{!$Site.AdminEmailAddress}"/>
+		<apex:param value="{!$Label.site.email_us}"/>
+	</apex:outputText>
+	</apex:define-->
+</apex:page>

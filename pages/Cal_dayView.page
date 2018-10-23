@@ -1,0 +1,5 @@
+<apex:page >
+    <apex:iframe frameborder="true" title="here" height="200px" width="200px" scrolling="false" src="/apex/dayView" rendered="true"></apex:iframe>
+
+
+</apex:page>

@@ -1,0 +1,47 @@
+<apex:page id="locationSearchPage"
+			controller="locationController"
+			standardStylesheets="true"
+			showHeader="false"
+			sidebar="false">
+	<script>
+			Visualforce.remoting.Manager.invokeAction(
+				'{!$RemoteAction.locationController.getRemoteLocations}',
+				letter, lat, lon, dist, state,
+				function(result, event){
+					if (event.status) {
+
+						var outputText = '<table width="100%">';
+						outputText += '<tr>';
+							outputText += '<th class="header">name</th>';
+							outputText += '<th class="header">type</th>';
+							outputText += '<th class="header">address</th>';
+							outputText += '<th class="header">distance miles</th>';
+						outputText += '</tr>';
+
+						for (var i=0;i<result.length;i++) {
+							var lineType = 'odd';
+							if (i%2===0) lineType = 'even';
+							outputText += '<tr class="' + lineType + '">';
+								outputText += '<td class="tableBody orange">' + result[i].Name + '</td>';
+								outputText += '<td class="tableBody white">' + result[i].Type__c + '</td>';
+								outputText += '<td class="tableBody white">' + result[i].Formatted_Address__c + '</td>';
+								outputText += '<td class="tableBody white">' + result[i].expr0.toFixed(0) + '</td>';
+							outputText += '</tr>';
+						}
+						outputText += '</table>';
+						$("#locationList").html(outputText);
+						$("#locationList").show();
+					} else if (event.type === 'exception') {
+						alert('fail');
+						//document.getElementById("responseErrors").innerHTML = 
+						//	event.message + "<br/>\n<pre>" + event.where + "</pre>";
+					} else {
+						alert('else');
+						//document.getElementById("responseErrors").innerHTML = event.message;
+					}
+				}, 
+				{escape: true}
+			);
+		}
+	</script>
+</apex:page>

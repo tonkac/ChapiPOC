@@ -1,0 +1,20 @@
+<apex:page standardController="BIA__c" extensions="getRelatedAssets">
+  	<apex:form >
+	    <apex:pageBlock tabStyle="Tech_Asset__c" id="message" title="Related Tech Assets" mode="detail">
+	    	<apex:pageBlockButtons >
+	    		<apex:commandButton action="{!populateValues}" value="Get Records" id="theButton" rendered="{!NOT(clear)}"/>
+	    		<apex:commandButton action="{!clearValues}" value="Clear Records" id="theButton2" rendered="{!clear}"/>
+	    	</apex:pageBlockButtons>
+	    	<apex:dataTable value="{!assets}" var="asset" id="thisTable" border="2" cellpadding="2" cellspacing="2"  rendered="{!show}">
+	    		<apex:column >
+	    			<apex:facet name="header">Id</apex:facet>
+	     			<apex:outputText value="{!asset.id}"/>
+	    		</apex:column>
+	    		<apex:column >
+	    			<apex:facet name="header">Name</apex:facet>
+	    			<apex:outputText value="{!asset.name}"/>
+	    		</apex:column>
+	    	</apex:dataTable>
+	    </apex:pageBlock>
+	</apex:form>
+</apex:page>

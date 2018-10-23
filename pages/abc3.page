@@ -1,0 +1,282 @@
+<apex:page id="ABCsOfTouring"
+			controller="ABCsOfTouring_controller"
+			standardStylesheets="true"
+			showHeader="false"
+			sidebar="false">
+	<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    
+	<head>
+		<title>ABCsOfTouring.com</title>
+		<apex:stylesheet value="{!URLFOR($Resource.SLDS201, 'assets/styles/salesforce-lightning-design-system.css')}" />
+		<apex:includeScript value="{!URLFOR($Resource.jQuery)}" />
+	</head>
+    <script src="https://apis.google.com/js/client.js?onload=checkAuth"/>
+	<script type="text/javascript">
+		$(document).ready(initializePage);
+		function initializePage() {
+			$("#showFilters").click(function() {
+				$("#showFilters").hide();
+				$("#hideFilters").show();
+				$("#filterPanel").show();
+			});
+			$("#hideFilters").click(function() {
+				$("#showFilters").show();
+				$("#hideFilters").hide();
+				$("#filterPanel").hide();
+			});
+			$("#resetFilters").click(function() {
+				$("#selectLocType").val("");
+				$("#selectLocLetter").val("");
+				$("#selectLocState").val("");
+				$("#selectOptionMaxRecords").val("25");
+				$("#selectLocMaxDistance").val("250");
+			});
+		}
+	</script>
+	<style type="text/css">
+		.optionSelected {
+
+		}
+		.fieldSpacing {
+			padding-top: 1px;
+		}
+		.bold {
+			font-weight: bold;
+		}
+
+		.action {
+			cursor: pointer;
+		}
+
+		.panelSpacing {
+			padding-top: 5px;
+		}
+
+		body {
+			padding-left: 20px;
+			padding-right: 20px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			background-color: #ffffff;
+			background-image: url("{!URLFOR($Resource.bg_gif)}");
+			background-repeat: repeat-x;
+		}
+
+		ul li {
+			margin-left: 0px;
+		}
+	</style>
+	<body>
+		<div class="slds-size--1-of-1 slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium slds-form--horizontal panelSpacing">
+			<div class="slds-form-element ">
+				<legend class="slds-form-element__legend slds-form-element__label bold">
+					<abbr class="slds-required" title="required">*</abbr>Address
+				</legend>
+				<div class="slds-form-element__control">
+					<input class="slds-input" id="inputSample2" placeholder="Enter Address, City, State, OR Zip" type="text" />
+					<button aria-live="assertive" class="slds-button slds-button--neutral slds-not-selected fieldSpacing" id="outButton">
+						<div class="slds-text-not-selected" id="showFilters">
+							<svg aria-hidden="true" class="slds-button__icon--stateful slds-button__icon--left">
+								<use xlink:href="{!URLFOR($Resource.SLDS201, 'assets/icons/utility-sprite/svg/symbols.svg#add')}"></use>
+						</svg>Filters</div>
+						<div class="slds-text-selected-focus" id="hideFilters">
+							<svg aria-hidden="true" class="slds-button__icon--stateful slds-button__icon--left">
+								<use xlink:href="{!URLFOR($Resource.SLDS201, 'assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+						</svg>Filters</div>
+					</button>
+					<span id="resetFilters" class="action">Reset Filter</span>
+				</div>
+			</div>
+			<div id="filterPanel" style="display: none;">
+				<fieldset class="slds-form-element">
+					<legend class="slds-form-element__legend slds-form-element__label">Type of Location</legend>
+					<div class="slds-form-element__control fieldSpacing">
+						<div class="slds-form-element">
+							<div class="slds-form-element__control">
+								<div class="slds-select_container fieldSpacing">
+									<select id="selectLocType" class="slds-select">
+										<option value="" > </option>
+										<apex:repeat value="{!locationTypes}" var="lt">
+											<option value="{!lt.Name}" >{!lt.Name}</option>
+										</apex:repeat>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<legend class="slds-form-element__legend slds-form-element__label">Letter</legend>
+					<div class="slds-form-element__control fieldSpacing">
+						<div class="slds-form-element">
+							<div class="slds-form-element__control">
+								<div class="slds-select_container fieldSpacing">
+									<select id="selectLocLetter" class="slds-select" disabled="true">
+										<option value=""></option>
+										<option value="A">A</option>
+										<option value="B">B</option>
+										<option value="C">C</option>
+										<option value="D">D</option>
+										<option value="E">E</option>
+										<option value="F">F</option>
+										<option value="G">G</option>
+										<option value="H">H</option>
+										<option value="I">I</option>
+										<option value="J">J</option>
+										<option value="K">K</option>
+										<option value="L">L</option>
+										<option value="M">M</option>
+										<option value="N">N</option>
+										<option value="O">O</option>
+										<option value="P">P</option>
+										<option value="Q">Q</option>
+										<option value="R">R</option>
+										<option value="S">S</option>
+										<option value="T">T</option>
+										<option value="U">U</option>
+										<option value="V">V</option>
+										<option value="W">W</option>
+										<option value="X">X</option>
+										<option value="Y">Y</option>
+										<option value="Z">Z</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<legend class="slds-form-element__legend slds-form-element__label">State/Province</legend>
+					<div class="slds-form-element__control fieldSpacing">
+						<div class="slds-form-element">
+							<div class="slds-form-element__control">
+								<div class="slds-select_container">
+									<select id="selectLocState" class="slds-select" disabled="true">
+										<option value=""></option>
+										<option value='AK'>AK</option>
+										<option value='AL'>AL</option>
+										<option value='AR'>AR</option>
+										<option value='AZ'>AZ</option>
+										<option value='CA'>CA</option>
+										<option value='CO'>CO</option>
+										<option value='CT'>CT</option>
+										<option value='DC'>DC</option>
+										<option value='DE'>DE</option>
+										<option value='FL'>FL</option>
+										<option value='GA'>GA</option>
+										<option value='HI'>HI</option>
+										<option value='IA'>IA</option>
+										<option value='ID'>ID</option>
+										<option value='IL'>IL</option>
+										<option value='IN'>IN</option>
+										<option value='KS'>KS</option>
+										<option value='KY'>KY</option>
+										<option value='LA'>LA</option>
+										<option value='MA'>MA</option>
+										<option value='MD'>MD</option>
+										<option value='ME'>ME</option>
+										<option value='MI'>MI</option>
+										<option value='MN'>MN</option>
+										<option value='MO'>MO</option>
+										<option value='MS'>MS</option>
+										<option value='MT'>MT</option>
+										<option value='NC'>NC</option>
+										<option value='ND'>ND</option>
+										<option value='NE'>NE</option>
+										<option value='NH'>NH</option>
+										<option value='NJ'>NJ</option>
+										<option value='NM'>NM</option>
+										<option value='NV'>NV</option>
+										<option value='NY'>NY</option>
+										<option value='OH'>OH</option>
+										<option value='OK'>OK</option>
+										<option value='OR'>OR</option>
+										<option value='PA'>PA</option>
+										<option value='RI'>RI</option>
+										<option value='SC'>SC</option>
+										<option value='SD'>SD</option>
+										<option value='TN'>TN</option>
+										<option value='TX'>TX</option>
+										<option value='UT'>UT</option>
+										<option value='VA'>VA</option>
+										<option value='VT'>VT</option>
+										<option value='WA'>WA</option>
+										<option value='WI'>WI</option>
+										<option value='WV'>WV</option>
+										<option value='WY'>WY</option>
+										<option value="">--Canada--</option>
+										<option value='AB'>AB</option>
+										<option value='BC'>BC</option>
+										<option value='MB'>MB</option>
+										<option value='NB'>NB</option>
+										<option value='NL'>NL</option>
+										<option value='NT'>NT</option>
+										<option value='NS'>NS</option>
+										<option value='NU'>NU</option>
+										<option value='ON'>ON</option>
+										<option value='PE'>PE</option>
+										<option value='QC'>QC</option>
+										<option value='SK'>SK</option>
+										<option value='YT'>YT</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<legend class="slds-form-element__legend slds-form-element__label">Number Of Results:</legend>
+					<div class="slds-form-element__control fieldSpacing">
+						<div class="slds-form-element">
+							<div class="slds-form-element__control">
+								<div class="slds-select_container">
+									<select id="selectOptionMaxRecords" class="slds-select">
+										<option value=""></option>
+										<option value="1">1</option>
+										<option value="10">10</option>
+										<option value="25" selected="true">25</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<legend class="slds-form-element__legend slds-form-element__label">Max Distance:</legend>
+					<div class="slds-form-element__control fieldSpacing">
+						<div class="slds-form-element">
+							<div class="slds-form-element__control">
+								<div class="slds-select_container">
+									<select id="selectOptionMaxDistance" class="slds-select">
+										<option value="25">25</option>
+										<option value="100">100</option>
+										<option value="250" selected="true">250</option>
+										<option value="500">500</option>
+										<option value="1000">1,000</option>
+										<option value="2000">2,000</option>
+										<option value="3000">3,000</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>&nbsp;
+			<ul class="slds-has-dividers--around-space">
+				<li class="slds-item slds-theme--shade">
+					<div class="slds-tile slds-tile--board">
+						<p class="slds-truncate" title="Anypoint Connectors"><a href="javascript:void(0);">Anypoint Connectors</a></p>
+						<div class="slds-tile__detail slds-text-body--small">
+							<p class="slds-text-heading--medium">$500,000</p>
+							<p class="slds-truncate"><a href="javascript:void(0);">Company One</a></p>
+							<p class="slds-truncate">Closing 9/30/2015</p>
+						</div>
+					</div>
+				</li>
+
+				<li class="slds-item  slds-theme--shade">
+					<div class="slds-tile slds-tile--board">
+						<p class="slds-truncate" title="Anypoint Connectors"><a href="javascript:void(0);">Anypoint Connectors</a></p>
+						<div class="slds-tile__detail slds-text-body--small">
+							<p class="slds-text-heading--medium">$500,000</p>
+							<p class="slds-truncate"><a href="javascript:void(0);">Company One</a></p>
+							<p class="slds-truncate">Closing 9/30/2015</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+	</body>
+	</html>
+</apex:page>
